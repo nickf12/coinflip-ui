@@ -49,6 +49,7 @@ export class FaucetSender extends Component<
         const balances: readonly Coin[] = await client.getAllBalances(
             this.props.faucetAddress,
         )
+        console.log("balances", balances)
         const first: Coin = balances[0]
         this.setState({
             denom: first.denom,
@@ -87,8 +88,7 @@ export class FaucetSender extends Component<
             const account: AccountData = (await offlineSigner.getAccounts())[0]
             this.setState({
                 myAddress: account.address,
-                myBalance: (await signingClient.getBalance(account.address, denom))
-                    .amount,
+                myBalance: (await signingClient.getBalance(account.address, denom)).amount,
             })
             // Submit the transaction to send tokens to the faucet
             const sendResult = await signingClient.sendTokens(
@@ -101,20 +101,19 @@ export class FaucetSender extends Component<
                     },
                 ],
                 {
-                    amount: [{ denom: "uatom", amount: "500" }],
+                    amount: [{ denom: "uatom", amount: toSend }],
                     gas: "200000",
                 },
             )
             // Print the result to the console
-            console.log(sendResult)
+            console.log("Result", sendResult)
             // Update the balance in the user interface
             this.setState({
-                myBalance: (await signingClient.getBalance(account.address, denom))
-                    .amount,
+                myBalance: (await signingClient.getBalance(account.address, denom)).amount,
                 faucetBalance: (
-                    await signingClient.getBalance(faucetAddress, denom)
-                ).amount,
+                    await signingClient.getBalance(faucetAddress, denom)).amount,
             })
+            console.log("State", this.state)
         } catch (error) {
             console.log(error)
         }
