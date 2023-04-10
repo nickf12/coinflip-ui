@@ -14,4 +14,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 If you don't have any token in your testnet address, an error will be returned.
 
-To get testnet faucet tocket enter in cosmos [https://discord.gg/cosmosnetwork](discord) testnet-faucet channel.
+To get testnet faucet tocket enter in cosmos [https://discord.com/invite/cosmosnetwork] testnet-faucet channel.
